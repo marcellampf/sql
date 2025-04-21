@@ -31,7 +31,7 @@ WHERE
   prev_year_sales IS NOT NULL
 ORDER BY
   Genre, Year;
-
+----------------------------------------------------------------------------------------------------------------------------
 -- 2. Outlier Detection by Genre
 WITH genre_stats AS (
   SELECT
@@ -59,7 +59,7 @@ WHERE
   (vgs.Global_Sales - gs.avg_sales)/gs.std_sales > 2
 ORDER BY
   z_score DESC;
-
+----------------------------------------------------------------------------------------------------------------------------
 -- 3. Game with the same name on the same platform
 WITH duplicated_games AS (
   SELECT
@@ -84,7 +84,7 @@ ON
   v.Name = d.Name
 ORDER BY
   v.Name, v.Global_Sales DESC;
-
+----------------------------------------------------------------------------------------------------------------------------
 -- 4. Simple Forecast: Average Sales in the Last 3 Years
 WITH last_years AS (
   SELECT DISTINCT Year
@@ -107,7 +107,7 @@ GROUP BY
   Genre
 ORDER BY
   avg_sales_last_3_years DESC;
-
+----------------------------------------------------------------------------------------------------------------------------
 -- 5. Publisher Market Share by Year**
 WITH publisher_sales AS (
   SELECT
